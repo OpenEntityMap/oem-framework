@@ -9,13 +9,16 @@ class IndexStorage(BaseStorage):
         """
         raise NotImplementedError
 
+    def get(self, index, key):
+        raise NotImplementedError
+
     def load(self, collection):
         """
         :rtype: oem_framework.models.Index
         """
         raise NotImplementedError
 
-    def parse_metadata(self, collection, key, value):
+    def parse(self, collection, key, value):
         """
         :rtype: oem_framework.models.Metadata
         """

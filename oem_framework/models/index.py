@@ -41,22 +41,7 @@ class Index(Model):
         return str(key) in self.items or key in self.items
 
     def __getitem__(self, key):
-        # Retrieve item
-        try:
-            value = self.items[str(key)]
-        except KeyError:
-            exc_info = sys.exc_info()
-
-            try:
-                value = self.items[key]
-            except KeyError:
-                raise exc_info[0], exc_info[1], exc_info[2]
-
-        # Ensure item has been parsed
-        if type(value) is dict:
-            value = self.items[str(key)] = self.storage.parse_metadata(self.collection, key, value)
-
-        return value
+        return self.storage.get(self, key)
 
     def __setitem__(self, key, value):
         self.items[str(key)] = value
