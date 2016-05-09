@@ -2,6 +2,7 @@ import os
 
 
 class Format(object):
+    __construct__ = None
     __extension__ = None
     __supports_binary__ = None
 
@@ -10,7 +11,7 @@ class Format(object):
         return False
 
     #
-    # Basic
+    # Dump
     #
 
     def dump_file(self, obj, fp):
@@ -23,6 +24,10 @@ class Format(object):
     def dump_string(self, obj):
         raise NotImplementedError
 
+    #
+    # Load
+    #
+
     def load_file(self, fp):
         raise NotImplementedError
 
@@ -34,7 +39,7 @@ class Format(object):
         raise NotImplementedError
 
     #
-    # Models
+    # From
     #
 
     def from_dict(self, collection, model, data, **kwargs):
@@ -58,12 +63,14 @@ class Format(object):
         return self.from_dict(collection, model, self.load_file(fp), **parameters)
 
     def from_path(self, collection, model, path, **parameters):
-        parameters['path'] = path
-
         return self.from_dict(collection, model, self.load_path(path), **parameters)
 
     def from_string(self, collection, model, value, **parameters):
         return self.from_dict(collection, model, self.load_string(value), **parameters)
+
+    #
+    # To
+    #
 
     def to_dict(self, item, **kwargs):
         """Converted `item` into a dictionary
@@ -84,6 +91,20 @@ class Format(object):
 
     def to_string(self, item, **parameters):
         return self.dump_string(self.to_dict(item, **parameters))
+
+    #
+    # Encode + Decode
+    #
+
+    def encode(self, model, data, **kwargs):
+        return data
+
+    def decode(self, model, data, **kwargs):
+        return data
+
+    #
+    # Helper methods
+    #
 
     def parse_path(self, path):
         ext = '.' + self.__extension__

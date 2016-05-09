@@ -6,14 +6,12 @@ log = logging.getLogger(__name__)
 
 
 class Collection(Model):
-    def __init__(self, path, source, target, fmt, index=None, minify=None):
-        self.path = path
+    def __init__(self, storage, source, target, index=None, minify=None):
+        self.storage = storage
         self.source = source
         self.target = target
 
-        self.format = fmt
         self.index = index
-
         self.minify = minify
 
     def get(self, key, hash=None, default=None):
@@ -49,13 +47,13 @@ class Collection(Model):
 
     def __repr__(self):
         if self.source and self.target:
-            return '<Collection %s -> %s (%s)>' % (
+            return '<Collection %s -> %s (%r)>' % (
                 self.source,
                 self.target,
-                self.format.__extension__ if self.format else None
+                self.storage
             )
 
-        return '<Collection %s (%s)>' % (
+        return '<Collection %s (%r)>' % (
             self.source or self.target,
-            self.format.__extension__ if self.format else None
+            self.storage
         )

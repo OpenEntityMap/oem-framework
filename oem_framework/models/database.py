@@ -6,9 +6,8 @@ log = logging.getLogger(__name__)
 
 
 class Database(Model):
-    def __init__(self, path, fmt, source, target):
-        self.path = path
-        self.format = fmt
+    def __init__(self, storage, source, target):
+        self.storage = storage
 
         self.source = source
         self.target = target
@@ -16,8 +15,8 @@ class Database(Model):
         self.collections = {}
 
     def __repr__(self):
-        return '<Database oem-%s-%s (%s)>' % (
+        return '<Database oem-%s-%s (%r)>' % (
             self.source,
             self.target,
-            self.format.__extension__ if self.format else None
+            self.storage
         )
