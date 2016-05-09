@@ -69,7 +69,10 @@ class Episode(BaseMedia):
             ]
 
         # Ensure all attributes were touched
-        omitted = set(data.keys()) - touched
+        omitted = [
+            k for k in (set(data.keys()) - touched)
+            if not k.startswith('_')
+        ]
 
         if omitted:
             log.warn('Episode.from_dict() omitted %d attribute(s): %s', len(omitted), ', '.join(omitted))
@@ -139,7 +142,10 @@ class EpisodeMapping(BaseMapping):
             ])
 
         # Ensure all attributes were touched
-        omitted = set(data.keys()) - touched
+        omitted = [
+            k for k in (set(data.keys()) - touched)
+            if not k.startswith('_')
+        ]
 
         if omitted:
             log.warn('EpisodeMapping.from_dict() omitted %d attribute(s): %s', len(omitted), ', '.join(omitted))

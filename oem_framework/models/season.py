@@ -66,7 +66,10 @@ class Season(BaseMedia):
             ]
 
         # Ensure all attributes were touched
-        omitted = set(data.keys()) - touched
+        omitted = [
+            k for k in (set(data.keys()) - touched)
+            if not k.startswith('_')
+        ]
 
         if omitted:
             log.warn('Season.from_dict() omitted %d attribute(s): %s', len(omitted), ', '.join(omitted))
@@ -142,7 +145,10 @@ class SeasonMapping(BaseMapping):
         )
 
         # Ensure all attributes were touched
-        omitted = set(data.keys()) - touched
+        omitted = [
+            k for k in (set(data.keys()) - touched)
+            if not k.startswith('_')
+        ]
 
         if omitted:
             log.warn('SeasonMapping.from_dict() omitted %d attribute(s): %s', len(omitted), ', '.join(omitted))
