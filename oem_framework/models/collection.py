@@ -46,14 +46,10 @@ class Collection(Model):
         self.index[key] = value
 
     def __repr__(self):
-        if self.source and self.target:
-            return '<Collection %s -> %s (%r)>' % (
-                self.source,
-                self.target,
-                self.storage
-            )
+        fmt = self.storage.format if self.storage else None
+        ext = fmt.__extension__ if fmt else None
 
-        return '<Collection %s (%r)>' % (
-            self.source or self.target,
-            self.storage
-        )
+        if self.source and self.target:
+            return '<Collection %s -> %s (%s)>' % (self.source, self.target, ext)
+
+        return '<Collection %s (%s)>' % (self.source or self.target, ext)

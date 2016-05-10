@@ -27,7 +27,7 @@ class BaseMedia(Model):
 
     @property
     def format(self):
-        return self.collection.format
+        return self.collection.storage.format
 
     def hash(self):
         # Convert object to bencode
