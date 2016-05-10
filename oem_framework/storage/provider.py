@@ -19,23 +19,30 @@ class ProviderStorage(BaseStorage):
         """
         raise NotImplementedError
 
-    def open_database(self, source, target, version=None):
+    def open_database(self, source, target):
         """
         :rtype: oem_framework.models.Database
         """
         raise NotImplementedError
 
     #
+    # Collection methods
+    #
+
+    def has_collection(self, source, target):
+        raise NotImplementedError
+
+    def get_collection_version(self, source, target):
+        raise NotImplementedError
+
+    def update_collection(self, source, target, version):
+        raise NotImplementedError
+
+    #
     # Index methods
     #
 
-    def has_index(self, source, target, version):
-        """
-        :rtype: bool
-        """
-        raise NotImplementedError
-
-    def update_index(self, source, target, version, response):
+    def update_index(self, source, target, response):
         """
         :rtype: bool
         """
@@ -45,13 +52,13 @@ class ProviderStorage(BaseStorage):
     # Item methods
     #
 
-    def has_item(self, source, target, version, key):
+    def has_item(self, source, target, key):
         """
         :rtype: bool
         """
         raise NotImplementedError
 
-    def update_item(self, source, target, version, key, response, metadata):
+    def update_item(self, source, target, key, response, metadata):
         """
         :rtype: bool
         """
