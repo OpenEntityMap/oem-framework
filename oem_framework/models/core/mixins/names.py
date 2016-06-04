@@ -30,14 +30,14 @@ class NamesMixin(object):
 
         if type(names) is set:
             if not identifiers or collection.target not in identifiers:
-                log.warn('Unable to parse names, unsupported identifiers format')
+                log.info('Unable to parse names, unsupported identifiers format')
                 return None
 
             # Retrieve target key
             target_key = identifiers[collection.target]
 
             if type(target_key) is list:
-                log.warn('Unable to parse names, multiple keys returned for service')
+                log.info('Unable to parse names, multiple keys returned for service')
                 return None
 
             # Convert `names` to dictionary
