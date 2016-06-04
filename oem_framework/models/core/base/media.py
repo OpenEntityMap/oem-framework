@@ -99,6 +99,29 @@ class BaseMedia(Model, NamesMixin):
 
         return result
 
+    def matches_identifiers(self, identifiers):
+        for service, key_a in identifiers.items():
+            if service not in self.identifiers:
+                return False
+
+            key_b = self.identifiers[service]
+
+            if type(key_a) is list and type(key_b) is list:
+                # Ensure all the keys in `key_b` are in `key_a`
+                if set(key_b) - set(key_a):
+                    return False
+            elif type(key_a) is list:
+                # Not supported
+                return False
+            elif type(key_b) is list:
+                # Ensure `key_b` is in `key_a`
+                if key_a not in key_b:
+                    return False
+            elif key_a != key_b:
+                return False
+
+        return True
+
     @classmethod
     def _flatten(cls, value, key=None, flatten=True):
         if type(value) in [str, unicode, int]:
