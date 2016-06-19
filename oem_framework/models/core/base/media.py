@@ -3,7 +3,7 @@ from oem_framework.models.core.base.mapping import BaseMapping
 from oem_framework.models.core.base.model import Model
 from oem_framework.models.core.mixins.names import NamesMixin
 
-from bencode import bencode
+from bencoder import bencode
 import collections
 import hashlib
 import inspect
@@ -59,7 +59,7 @@ class BaseMedia(Model, NamesMixin):
         # Encode `data` to a bencode string
         try:
             return bencode(data)
-        except Exception, ex:
+        except Exception as ex:
             log.warn('Unable to encode object to bencode: %s', ex, exc_info=True)
             return None
 
