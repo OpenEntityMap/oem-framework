@@ -16,6 +16,17 @@ class NamesMixin(object):
             data['names'] = data['names'].values()[0]
             return True
 
+        if type(data['names']) is dict:
+            unique_names = set()
+
+            for _, names in data['names'].items():
+                for name in names:
+                    unique_names.add(name)
+
+            if len(unique_names) == 1:
+                data['names'] = {'*': data['names'].values()[0]}
+                return True
+
         # Remove "names" attribute
         if not data['names']:
             del data['names']
