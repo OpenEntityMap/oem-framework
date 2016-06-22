@@ -1,0 +1,19 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install -U setuptools
+script: true
+after_success: python setup.py sdist bdist_wheel
+deploy:
+  provider: releases
+  api_key:
+    secure: nWTPChiqjspLAM61DvREwr4DgU9qpRoAplPIqD2k64NAr3ppHdx9Wu+OneP+MiS3gkx+TNdAUIdVwP4Th0rtqBXUFoSCugmMBbtYMRKscmiJaiHH3cd0uflgfArMPgEUThTQUXCHhwXHSXOI/bwclO9TlOwtl/vVMOznTMh+LYxLzQOxjcPu26KXdHYUl86113mONlcM/trdDP8NQsQH9dzszkqxYbH6PV2m5UdH/9QtKEuC0PgwDMiqJ3W9C7r3k+WSwH0lOR8BzG34BbjgaHZmeEXyakCMzK6dg3JX1rhL//U7gxKnV58x5egpxhrd5uP/2w6E3g43eF4WBp6Phy8UmqSKmxjbw0zvQ+t68FSqkKAC5M/ag/ce6GFXdsvOGhtbn+qrm3XENbiBIxoRMRCaz/nbR8oeZFCnBV2ThArvLW4NqI9+gOecfG6RxUtf3nvsh0Yft6liAMRi5pjUQts/pZnaqWei1LCEeF3fUjAIdZE+JqcKB6zq8JOQlLbomFwXzbFzDflH2C2Ri3QkSiOJO9g3Z72AEEw9DKY9tCSIGfCkyEosNPp2UbIBLaY5ww4KPqCEKbByyuGHHcoU4ddCVIW/2deO7caK6wKvV39gduOHnt3IyEGQzQ+ZLKG3nCzEEJXg8VwqHb62BCbvplwtdriL9Z/LNrfIVF+IsYE=
+  skip_cleanup: true
+  file_glob: true
+  file:
+  - "dist/oem-framework-*"
+  - "dist/oem_framework-*"
+  on:
+    repo: OpenEntityMap/oem-framework
+    tags: true
