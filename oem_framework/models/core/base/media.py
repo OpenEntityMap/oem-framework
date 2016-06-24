@@ -3,7 +3,7 @@ from oem_framework.models.core.base.mapping import BaseMapping
 from oem_framework.models.core.base.model import Model
 from oem_framework.models.core.mixins.names import NamesMixin
 
-from bencoder import bencode
+from bencode import bencode
 import collections
 import hashlib
 import inspect

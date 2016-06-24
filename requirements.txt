@@ -1,2 +1,2 @@
-bencoder.pyx>=1.0.0
+bencode.py>=1.1.0
 six>=1.10.0
